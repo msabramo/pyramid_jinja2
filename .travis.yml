@@ -8,5 +8,7 @@ python:
 install:
   - python setup.py develop
   - easy_install pyramid_jinja2[testing]
+  - pip install nosexcover
 script:
-  - nosetests --with-coverage
+  - mkdir -p shippable/testresults
+  - nosetests --with-xunit --xunit-file=$(pwd)/shippable/testresults/nosetests.xml --with-xcoverage --cover-package=pyramid_jinj2 --xcoverage-file=$(pwd)/shippable/codecoverage/coverage.xml
